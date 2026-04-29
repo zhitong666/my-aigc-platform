@@ -32,3 +32,8 @@ export type TimedMessage = BaseMessage & {
   createTime: number
   role: Role
 }
+
+// 新增：输入框表单类型（受控表单用）
+export interface InputForm {
+  message: string // 输入的消息内容
+}
