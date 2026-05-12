@@ -37,3 +37,6 @@ export type TimedMessage = BaseMessage & {
 export interface InputForm {
   message: string // 输入的消息内容
 }
+
+// 新增：通用布局子元素类型
+export type Children = React.ReactNode
