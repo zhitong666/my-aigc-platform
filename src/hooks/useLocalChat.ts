@@ -42,6 +42,7 @@ export function useLocalChat(){
 
   return {
     messages,
+    setMessages,
     messagesRef,
     sendUserMsg
   }
