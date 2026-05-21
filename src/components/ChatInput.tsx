@@ -16,10 +16,29 @@ export default function ChatInput({ form, onChange, onSend, disabled }: ChatInpu
         value={form.message}
         onChange={onChange}
         placeholder="请输入消息..."
-        style={{ flex: 1, padding: 0, fontSize: 14}}
         disabled={disabled}
+        style={{
+          flex: 1,
+          padding: '8px 12px',
+          fontSize: 14,
+          border: '1px solid #eee',
+          borderRadius: 4,
+          outline: 'none'
+        }}
       />
-      <button onClick={onSend} style={{ padding: '0 16px'}} disabled={disabled}>{disabled ? '发送中...' : '发送'}</button>
+      <button 
+        onClick={onSend}
+        disabled={disabled}
+        style={{
+          padding: '0 16px',
+          backgroundColor: '#1890ff',
+          color: 'white',
+          border: 'none',
+          borderRadius: 4,
+          cursor: disabled ? 'not-allowed' : 'pointer',
+          opacity: disabled ? 0.6 : 1
+        }}
+      >{disabled ? '发送中...' : '发送'}</button>
     </div>
   )
 }

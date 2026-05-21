@@ -10,7 +10,7 @@ export function useChatStream() {
   const requestAIStream = async(
     userMessage: string,
     onChunk: (content: string) => void
-  ) => {
+  ): Promise<string> => {
     setLoading(true)
     aiMessageRef.current = ''
 
@@ -41,9 +41,13 @@ export function useChatStream() {
           }
         }
       }
+      return aiMessageRef.current
     } catch (err) { 
       console.error('流式请求失败：', err)
-      onChunk('AI 服务异常，请稍后重试')
+      const errorMessage = 'AI 服务异常，请稍后重试'
+      aiMessageRef.current = errorMessage
+      onChunk(errorMessage)
+      return errorMessage
     } finally {
       setLoading(false)
     }
