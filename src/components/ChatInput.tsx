@@ -1,16 +1,21 @@
 import type { InputForm } from '../types/chat'
-import type { ChangeEvent } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
 
 interface ChatInputProps {
   form: InputForm
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  onSend: () => void,
+  onSend: () => void | Promise<void>,
   disabled?: boolean
 }
 
 export default function ChatInput({ form, onChange, onSend, disabled }: ChatInputProps){
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    void onSend()
+  }
+
   return (
-    <div style={{ display: 'flex', gap: 8, margin: '20px 0'}}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 8, margin: '20px 0'}}>
       <input
         type="text"
         value={form.message}
@@ -27,7 +32,7 @@ export default function ChatInput({ form, onChange, onSend, disabled }: ChatInpu
         }}
       />
       <button 
-        onClick={onSend}
+        type="submit"
         disabled={disabled}
         style={{
           padding: '0 16px',
@@ -39,6 +44,6 @@ export default function ChatInput({ form, onChange, onSend, disabled }: ChatInpu
           opacity: disabled ? 0.6 : 1
         }}
       >{disabled ? '发送中...' : '发送'}</button>
-    </div>
+    </form>
   )
 }

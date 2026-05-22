@@ -6,6 +6,7 @@ import ChatInput from './components/ChatInput'
 import { useLocalChat } from './hooks/useLocalChat'
 import { useChatInput } from './hooks/useChatInput'
 import { useChatStream } from './hooks/useChatStream'
+import { CHAT_STORAGE_KEY } from './constants/chat'
 import type { Message } from './types/chat'
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
   const clearAllChat = () => {
     setMessages([])
     setStreamMsg(null)
-    localStorage.removeItem('chatMessages')
+    localStorage.removeItem(CHAT_STORAGE_KEY)
   }
   
   // ✅【终极修复】正确管理流式消息，永不丢失、永不空对象
